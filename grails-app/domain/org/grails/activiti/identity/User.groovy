@@ -23,7 +23,10 @@ class User implements org.activiti.engine.identity.User {
 		lastName blank: false
 	}
 
-	static mapping = { password column: '`password`' }
+	static mapping = {
+		password column: '`password`'
+		id generator: 'uuid' // not entire sure why adding this bit actually fixed the start method of actitivy = true
+	}
 
 	Set<Role> getAuthorities() {
 		UserRole.findAllByUser(this).collect { it.role } as Set

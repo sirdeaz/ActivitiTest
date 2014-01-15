@@ -7,7 +7,10 @@ class Role implements org.activiti.engine.identity.Group {
 	String authority
 	String type
 
-	static mapping = { cache true }
+	static mapping = {
+		cache true
+		id generator: 'assigned'
+	}
 
 	static constraints = {
 		authority blank: false, unique: true

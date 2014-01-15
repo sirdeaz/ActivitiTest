@@ -12,7 +12,7 @@
 			<documentation>Vacation request by ${username}</documentation>
 			<potentialOwner>
 				<resourceAssignmentExpression>
-					<formalExpression>ROLE_USER</formalExpression>
+					<formalExpression>ROLE_USER,ROLE_MANAGER</formalExpression>
 				</resourceAssignmentExpression>
 			</potentialOwner>
 		</userTask>
@@ -32,25 +32,30 @@
 		<exclusiveGateway id="requestApproved" name="Request Approved?" />
 		<sequenceFlow id="flow3" targetRef="sendConfirmationE-mail"
 			sourceRef="requestApproved">
-			<conditionExpression xsi:type="tFormalExpression">${vacationApproved}</conditionExpression>
+			<conditionExpression xsi:type="tFormalExpression">${vacationApproved}
+			</conditionExpression>
 		</sequenceFlow>
-		<serviceTask id="sendConfirmationE-mail" name="Send Confirmation E-mail"
-			activiti:type="mail">
-			<extensionElements>
-				<activiti:field expression="${from}" name="from" />
-				<activiti:field expression="${emailTo}" name="to" />
-				<activiti:field stringValue="Your Vacation Request has been approved." name="subject" />
-				<activiti:field name="text">
-					<activiti:expression>${approvalRemark}</activiti:expression>
-				</activiti:field>
-			</extensionElements>
-		</serviceTask>
+<!-- 		<serviceTask id="sendConfirmationE-mail" activiti:delegateExpression="${delegateExpressionBean}" /> -->
+		<serviceTask id="sendConfirmationE-mail" name="My Java Service Task" activiti:class="org.activiti.MyJavaDelegate" />
+		<!-- <serviceTask id="sendConfirmationE-mail" name="Send Confirmation E-mail" -->
+		<!-- activiti:type="mail"> -->
+		<!-- <extensionElements> -->
+		<!-- <activiti:field expression="${from}" name="from" /> -->
+		<!-- <activiti:field expression="${emailTo}" name="to" /> -->
+		<!-- <activiti:field stringValue="Your Vacation Request has been approved." -->
+		<!-- name="subject" /> -->
+		<!-- <activiti:field name="text"> -->
+		<!-- <activiti:expression>${approvalRemark}</activiti:expression> -->
+		<!-- </activiti:field> -->
+		<!-- </extensionElements> -->
+		<!-- </serviceTask> -->
 		<sequenceFlow id="flow4" targetRef="end0"
 			sourceRef="sendConfirmationE-mail" />
 		<endEvent id="end0" />
 		<sequenceFlow id="flow5" targetRef="adjustVacationRequest"
 			sourceRef="requestApproved">
-			<conditionExpression xsi:type="tFormalExpression">${!vacationApproved}</conditionExpression>
+			<conditionExpression xsi:type="tFormalExpression">${!vacationApproved}
+			</conditionExpression>
 		</sequenceFlow>
 		<userTask id="adjustVacationRequest" activiti:formKey="/vacationRequest/edit"
 			name="Adjust Vacation Request">
@@ -67,11 +72,13 @@
 		<exclusiveGateway id="resendRequest" name="Resend Request?" />
 		<sequenceFlow id="flow7" targetRef="handleVacationRequest"
 			sourceRef="resendRequest">
-			<conditionExpression xsi:type="tFormalExpression">${resendRequest}</conditionExpression>
+			<conditionExpression xsi:type="tFormalExpression">${resendRequest}
+			</conditionExpression>
 		</sequenceFlow>
 		<sequenceFlow id="flow8" sourceRef="resendRequest"
 			targetRef="end1">
-			<conditionExpression xsi:type="tFormalExpression">${!resendRequest}</conditionExpression>
+			<conditionExpression xsi:type="tFormalExpression">${!resendRequest}
+			</conditionExpression>
 		</sequenceFlow>
 		<endEvent id="end1" />
 	</process>
