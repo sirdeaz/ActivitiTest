@@ -35,8 +35,10 @@
 			<conditionExpression xsi:type="tFormalExpression">${vacationApproved}
 			</conditionExpression>
 		</sequenceFlow>
-<!-- 		<serviceTask id="sendConfirmationE-mail" activiti:delegateExpression="${delegateExpressionBean}" /> -->
-		<serviceTask id="sendConfirmationE-mail" name="My Java Service Task" activiti:class="org.activiti.MyJavaDelegate" />
+		<!-- <serviceTask id="sendConfirmationE-mail" activiti:delegateExpression="${delegateExpressionBean}" 
+			/> -->
+		<serviceTask id="sendConfirmationE-mail" name="My Java Service Task"
+			activiti:class="org.activiti.MyJavaDelegate" />
 		<!-- <serviceTask id="sendConfirmationE-mail" name="Send Confirmation E-mail" -->
 		<!-- activiti:type="mail"> -->
 		<!-- <extensionElements> -->

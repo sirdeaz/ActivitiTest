@@ -8,23 +8,24 @@
 		isExecutable="true">
 		<startEvent id="startevent1" name="Start"></startEvent>
 		<userTask id="usertask1" name="Initiate Complaint Request"
-			activiti:candidateGroups="ROLE_USER,ROLE_MANAGEMENT"></userTask>
+			activiti:candidateGroups="ROLE_USER,ROLE_MANAGEMENT" activiti:formKey="/complaint/create"></userTask>
 		<userTask id="usertask2" name="Solve Complaint Request"
-			activiti:candidateGroups="ROLE_MANAGEMENT"></userTask>
-		<sequenceFlow id="flow1" sourceRef="usertask1" targetRef="usertask2"></sequenceFlow>
+			activiti:candidateGroups="ROLE_MANAGEMENT" activiti:formKey="/complaint/solve"></userTask>
+		<sequenceFlow id="flow1" sourceRef="usertask1" targetRef="usertask2" activiti:formKey="/complaint/verify"></sequenceFlow>
 		<userTask id="usertask3" name="Verify Solution"
 			activiti:assignee="${username}"></userTask>
 		<sequenceFlow id="flow2" sourceRef="usertask2" targetRef="usertask3"></sequenceFlow>
 		<sequenceFlow id="flow3" sourceRef="startevent1"
 			targetRef="usertask1"></sequenceFlow>
 		<exclusiveGateway id="solutionOk" name="solutionOk"></exclusiveGateway>
-		<sequenceFlow id="flow4" sourceRef="usertask3" targetRef="exclusivegateway1"></sequenceFlow>
-		<serviceTask id="servicetask1" name="doComplaintFixed"></serviceTask>
-		<sequenceFlow id="flow5" sourceRef="exclusivegateway1"
+		<sequenceFlow id="flow4" sourceRef="usertask3" targetRef="solutionOk"></sequenceFlow>
+		<serviceTask activiti:class="org.activiti.MyJavaDelegate"
+			id="servicetask1" name="doComplaintFixed"></serviceTask>
+		<sequenceFlow id="flow5" sourceRef="solutionOk"
 			targetRef="servicetask1">
 			<conditionExpression xsi:type="tFormalExpression"><![CDATA[${solutionOK}]]></conditionExpression>
 		</sequenceFlow>
-		<sequenceFlow id="flow6" sourceRef="exclusivegateway1"
+		<sequenceFlow id="flow6" sourceRef="solutionOk"
 			targetRef="usertask2">
 			<conditionExpression xsi:type="tFormalExpression"><![CDATA[${!solutionOK}]]></conditionExpression>
 		</sequenceFlow>
