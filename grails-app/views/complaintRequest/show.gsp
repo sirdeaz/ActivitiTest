@@ -46,17 +46,10 @@
                             
                         </tr>
                     
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="complaintRequest.solutionOK.label" default="Solution OK" /></td>
-                            
-                            <td valign="top" class="value"><g:formatBoolean boolean="${complaintRequestInstance?.solutionOK}" /></td>
-                            
-                        </tr>
-                    
                     </tbody>
                 </table>
             </div>
-            <g:if test="${!params.complete && params.taskId}">
+<%--            <g:if test="${!params.complete && params.taskId}">--%>
             <div class="buttons">
                 <g:form>
                     <g:hiddenField name="id" value="${complaintRequestInstance?.id}" />
@@ -65,7 +58,7 @@
                     <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
                 </g:form>
             </div>
-            </g:if>
+<%--            </g:if>--%>
         </div>
     </body>
 </html>

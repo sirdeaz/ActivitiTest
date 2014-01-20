@@ -52,6 +52,16 @@
                                     <g:textField name="solution" value="${complaintRequestInstance?.solution}" />
                                 </td>
                             </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="solutionOK"><g:message code="complaintRequest.solutionOK.label" default="Solution OK" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: complaintRequestInstance, field: 'solutionOK', 'errors')}">
+                                    <g:checkBox name="solutionOK" value="true" checked="false"/>
+                                </td>
+                            </tr>
+                        
                         </tbody>
                     </table>
                 </div>

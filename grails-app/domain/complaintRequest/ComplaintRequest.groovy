@@ -1,9 +1,9 @@
 package complaintRequest
 
 class ComplaintRequest {
-	
+
 	String description
 	String solution
-	
-	Boolean solutionOK
+
+	static constraints = { solution nullable: true }
 }

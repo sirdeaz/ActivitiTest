@@ -31,8 +31,6 @@
                         
                             <g:sortableColumn property="solution" title="${message(code: 'complaintRequest.solution.label', default: 'Solution')}" />
                         
-                            <g:sortableColumn property="solutionOK" title="${message(code: 'complaintRequest.solutionOK.label', default: 'Solution OK')}" />
-                        
                         </tr>
                     </thead>
                     <tbody>
@@ -44,8 +42,6 @@
                             <td>${fieldValue(bean: complaintRequestInstance, field: "description")}</td>
                         
                             <td>${fieldValue(bean: complaintRequestInstance, field: "solution")}</td>
-                        
-                            <td><g:formatBoolean boolean="${complaintRequestInstance.solutionOK}" /></td>
                         
                         </tr>
                     </g:each>
