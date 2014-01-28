@@ -1,6 +1,6 @@
 Sample project to learn about BPM and activiti.
 
-Added the complaint flow to the application. 
+Added a complaint flow to the application. 
 
 Following functionality was tested:
 
